@@ -20,15 +20,12 @@ function initialize() {
     center: montreal
   }
 
-  var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-  var myLatlng = new google.maps.LatLng(-73.57760350000001,45.5144594);
-  var marker = new google.maps.Marker({
-      position: myLatlng,
+  var map = new google.maps.Map(document.getElementById('map-canvas'), 
+ var marker = new google.maps.Marker({
+      position: montreal,
       map: map,
       title: 'Hello World!'
   });
-
-  
 
   
 }
