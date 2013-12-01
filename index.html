@@ -19,8 +19,8 @@
 
 function initialize() {
   var mapOptions = {
-    zoom: 15,
-    center: new google.maps.LatLng(45.508669900000000000, -73.553992499999990000)
+    zoom: 14,
+    center: new google.maps.LatLng(45.5289, -73.5928)
   }
   var map = new google.maps.Map(document.getElementById('map-canvas'),
                                 mapOptions);
@@ -117,7 +117,7 @@ function setMarkers(map, locations) {
         title: beach[0],
         //zIndex: beach[3]
     });
-    alert(marker);
+    
   }
 }
 
