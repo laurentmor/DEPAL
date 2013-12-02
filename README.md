@@ -18,6 +18,7 @@ TODO
 ====
 * Faire les 4 cartes
 * Faire une page qui formatte tout seul les coordonnées
+* Cleaner le code dans index.html
 
 
 
