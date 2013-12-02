@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Complex icons</title>
+    <style>
+      html, body, #map-canvas {
+        height: 100%;
+        margin: 0px;
+        padding: 0px
+      }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+    <script>
+// The following example creates complex markers to indicate beaches near
+// Sydney, NSW, Australia. Note that the anchor is set to
+// (0,32) to correspond to the base of the flagpole.
+
+function initialize() {
+  var mapOptions = {
+    zoom: 14,
+    center: new google.maps.LatLng(45.5289, -73.5928)
+  }
+  var map = new google.maps.Map(document.getElementById('map-canvas'),
+                                mapOptions);
+
+  setMarkers(map, beaches);
+}
+
+/**
+ * Data for the markers consisting of a name, a LatLng and a zIndex for
+ * the order in which these markers should display on top of each
+ * other.
+ */
+var beaches = [
+ ['A',-73.56555220000001,45.5213921,0.0],
+['A',-73.57247259999997,45.5200171,0.0],
+['A',-73.57495449999999,45.5188458,0.0],
+['A',-73.57760350000001,45.5144594,0.0],
+['A',-73.57885820000001,45.5206305,0.0],
+['A',-73.58332630000001,45.5199401,0.0],
+['A',-73.58602150000002,45.519164,0.0],
+['A',-73.58708949999999,45.5226037,0.0],
+['A',-73.58845539999999,45.5217351,0.0],
+['A',-73.5902097,45.5210899,0.0],
+['A',-73.58970620000002,45.5199018,0.0],
+['A',-73.60021849999998,45.5213376,0.0],
+['A',-73.60211290000001,45.5211662,0.0],
+['A',-73.60763109999999,45.5236154,0.0],
+['A',-73.60510779999998,45.5270841,0.0],
+['A',-73.5970845,45.5260061,0.0],
+['A',-73.58805530000001,45.5286157,0.0],
+['A',-73.59317369999997,45.532149,0.0],
+['A',-73.58560890000001,45.5286348,0.0],
+['A',-73.5827721,45.5306635,0.0],
+['A',-73.5809999,45.5314663,0.0],
+['A',-73.5820632,45.5326485,0.0],
+['A',-73.58156839999998,45.53317269999999,0.0],
+['A',-73.58312639999997,45.5357908,0.0],
+['A',-73.5762919,45.5336931,0.0],
+['A',-73.5696964,45.5372622,0.0],
+['A',-73.56644589999996,45.5349922,0.0],
+['A',-73.5626461,45.5325384,0.0],
+['A',-73.57590419999997,45.5384845,0.0],
+['A',-73.57884000000001,45.53382089999999,0.0],
+['A',-73.58643359999996,45.5346103,0.0],
+['A',-73.56968219999999,45.5222562,0.0],
+['A',-73.58034299999997,45.5317967,0.0],
+['A',-73.58787849999999,45.5269646,0.0],
+['A',-73.56659760000002,45.53244489999999,0.0],
+['A',-73.56673519999998,45.5325098,0.0],
+['A',-73.59658589999998,45.5257787,0.0],
+['A',-73.6007955,45.525018,0.0],
+['A',-73.58041609999998,45.5166689,0.0],
+['A',-73.58720470000003,45.527161,0.0],
+['A',-73.58845539999999,45.5217351,0.0],
+['A',-73.56861070000002,45.5209631,0.0],
+['A',-73.57761049999999,45.5261408,0.0],
+['A',-73.58731840000002,45.5358512,0.0],
+['A',-73.57928500000003,45.5258073,0.0],
+['A',-73.57335549999999,45.53727920000001,0.0]
+
+];
+
+function setMarkers(map, locations) {
+  // Add markers to the map
+
+  // Marker sizes are expressed as a Size of X,Y
+  // where the origin of the image (0,0) is located
+  // in the top left of the image.
+
+  
+  // Shapes define the clickable region of the icon.
+  // The type defines an HTML &lt;area&gt; element 'poly' which
+  // traces out a polygon as a series of X,Y points. The final
+  // coordinate closes the poly by connecting to the first
+  // coordinate.
+  var shape = {
+      coord: [1, 1, 1, 20, 18, 20, 18 , 1],
+      type: 'poly'
+  };
+  for (var i = 0, j=1; i < locations.length; i++,j++) {
+    
+    var beach = locations[i];
+    
+    // Origins, anchor positions and coordinates of the marker
+  // increase in the X direction to the right and in
+  // the Y direction down.
+  var image = {
+    url: 'markers/number_'+j+'.png',
+    // This marker is 20 pixels wide by 32 pixels tall.
+    size: new google.maps.Size(32, 37),
+    // The origin for this image is 0,0.
+    origin: new google.maps.Point(0,0),
+    // The anchor for this image is the base of the flagpole at 0,32.
+    anchor: new google.maps.Point(0, 37)
+  };
+    var myLatLng = new google.maps.LatLng(beach[2], beach[1]);
+    var marker = new google.maps.Marker({
+        position: myLatLng,
+        map: map,
+        icon: image,
+        shape: shape,
+        title: beach[0],
+        //zIndex: beach[3]
+    });
+    
+  }
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
+    </script>
+  </head>
+  <body>
+    <div id="map-canvas"></div>
+  </body>
+</html>
